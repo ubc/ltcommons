@@ -1,4 +1,18 @@
 {
+    "name": "ubc/sisapi",
+    "type": "library",
+    "description": "UBC SIS API Services",
+    "keywords": ["sis","ubc"],
+    "homepage": "http://github.com/ubc/sisapi",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pan Luo",
+            "email": "pan.luo@ubc.ca",
+            "homepage": "http://ctlt.ubc.ca",
+            "role": "Developer"
+        }
+    ],
     "repositories": [
         {
             "type": "pear",

@@ -1,5 +1,6 @@
 A Collection of UBC SIS API Services
 ====================================
+[![Build Status](https://travis-ci.org/ubc/sisapi.png)](https://travis-ci.org/ubc/sisapi)
 
 Install
 -------
