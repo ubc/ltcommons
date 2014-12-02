@@ -24,10 +24,10 @@
         "doctrine/collections": "~1.2",
         "guzzlehttp/guzzle": "5.0.*",
         "pear-pear.php.net/XML_RPC": "1.5.5",
-        "symfony/dependency-injection": "~2.6",
-        "symfony/config": "~2.6",
-        "symfony/proxy-manager-bridge": "~2.6",
-        "symfony/yaml": "~2.6"
+        "symfony/dependency-injection": "~2.3",
+        "symfony/config": "~2.3",
+        "symfony/proxy-manager-bridge": "~2.3",
+        "symfony/yaml": "~2.3"
     },
     "require-dev": {
         "phpunit/phpunit": "4.3.*"
