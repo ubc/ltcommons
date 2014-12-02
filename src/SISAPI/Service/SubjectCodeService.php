@@ -6,7 +6,7 @@ class SubjectCodeService extends BaseService{
 
     public function getSubjectCodes()
     {
-        $response = $this->client->get(self::BASE_PATH.'/subjectCode');
+        $response = $this->get('/subjectCode');
         return $this->serializer->deserialize($response->getBody(), 'UBC\SISAPI\Entity\SubjectCodes', 'xml');
     }
 }
