@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: compass
- * Date: 2014-11-26
- * Time: 2:04 PM
- */
-
 namespace UBC\SISAPI\Service;
 
 use UBC\SISAPI\Authentication\AuthModule;
@@ -36,9 +29,17 @@ abstract class BaseService
 
     public function get($uri)
     {
+        $url = $uri;
+        if ((substr($uri, 0, 7) != 'http://') && (substr($uri, 0, 8) != 'https://')) {
+            // the current link is an "relative" URL
+            $url = $this->config->getBaseUrl() . $uri;
+        }
         $headers = $this->auth->getHeader();
-        $this->response = $this->client->get($this->config->getBaseUrl() . $uri, ['headers' => $headers]);
-        return $this->response;
+
+        $this->response = $this->client->get($url, ['headers' => $headers]);
+        $body = $this->response->getBody();
+
+        return $this->stripNamespace($body);
     }
 
     /**
@@ -54,4 +55,16 @@ abstract class BaseService
     {
         return $this->response;
     }
-} 
+
+    /**
+     * As per https://github.com/schmittjoh/serializer/pull/301, JMS serializer doesn't support
+     * namespace in XmlList and XmlMap, so we need to strip them out for now
+     *
+     * @param $str
+     * @return string return
+     */
+    protected function stripNamespace($str)
+    {
+        return str_replace('atom:', '', $str);
+    }
+}

@@ -49,3 +49,8 @@ services:
     class: UBC\SISAPI\Service\DepartmentCodeService
     lazy: true
     arguments: ["@config", "@http_client", "@serializer", "@auth_module"]
+
+  student:
+    class: UBC\SISAPI\Service\StudentService
+    lazy: true
+    arguments: ["@config", "@http_client", "@serializer", "@auth_module"]
