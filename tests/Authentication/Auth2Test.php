@@ -1,5 +1,5 @@
 <?php
-use UBC\SISAPI\Authentication\Auth2;
+use UBC\LtCommons\Authentication\Auth2;
 
 /**
  * @backupGlobals disabled

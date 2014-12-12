@@ -1,8 +1,8 @@
 {
-    "name": "ubc/sisapi",
+    "name": "ubc/ltcommons",
     "type": "library",
-    "description": "UBC SIS API Services",
-    "keywords": ["sis","ubc"],
+    "description": "UBC LT Commons",
+    "keywords": ["sis","ubc", "ltcommons"],
     "homepage": "http://github.com/ubc/sisapi",
     "license": "MIT",
     "authors": [
@@ -33,6 +33,6 @@
         "phpunit/phpunit": "4.3.*"
     },
     "autoload": {
-        "psr-4": {"UBC\\SISAPI\\": "src/SISAPI/"}
+        "psr-4": {"UBC\\LtCommons\\": "src/LtCommons/"}
     }
 }

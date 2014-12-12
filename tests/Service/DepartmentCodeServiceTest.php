@@ -2,11 +2,11 @@
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
-use UBC\SISAPI\Authentication\Basic;
-use UBC\SISAPI\HttpClient\GuzzleClient;
-use UBC\SISAPI\Serializer\JMSSerializer;
-use UBC\SISAPI\Service\Config;
-use UBC\SISAPI\Service\DepartmentCodeService;
+use UBC\LtCommons\Authentication\Basic;
+use UBC\LtCommons\HttpClient\GuzzleClient;
+use UBC\LtCommons\Serializer\JMSSerializer;
+use UBC\LtCommons\Service\Config;
+use UBC\LtCommons\Service\DepartmentCodeService;
 
 class DepartmentCodeServiceTest extends \PHPUnit_Framework_TestCase {
     private $service;
@@ -28,7 +28,7 @@ class DepartmentCodeServiceTest extends \PHPUnit_Framework_TestCase {
         $auth = new Basic();
         $auth->setUsername($config->getAuthUsername());
         $auth->setPassword($config->getAuthPassword());
-        $provider = new \UBC\SISAPI\Provider\SISDataProvider($config, $client, $auth, $serializer);
+        $provider = new \UBC\LtCommons\Provider\SISDataProvider($config, $client, $auth, $serializer);
         $this->service = new DepartmentCodeService($config, $provider);
 
         // Create a mock subscriber
@@ -46,7 +46,7 @@ class DepartmentCodeServiceTest extends \PHPUnit_Framework_TestCase {
         $codes = $this->service->getDepartmentCodes();
 
         $this->assertEquals(3, count($codes->codes));
-        $this->assertContainsOnlyInstancesOf('UBC\SISAPI\Entity\DepartmentCode', $codes->codes);
+        $this->assertContainsOnlyInstancesOf('UBC\LtCommons\Entity\DepartmentCode', $codes->codes);
         $ids = array();
         foreach($codes->codes as $code) {
             $ids[] = $code->getId();

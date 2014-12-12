@@ -1,18 +1,18 @@
 <?php
 
 
-namespace UBC\SISAPI\Tests\Service;
+namespace UBC\LtCommons\Tests\Service;
 
 
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
-use UBC\SISAPI\Authentication\Basic;
-use UBC\SISAPI\HttpClient\GuzzleClient;
-use UBC\SISAPI\Provider\SISDataProvider;
-use UBC\SISAPI\Serializer\JMSSerializer;
-use UBC\SISAPI\Service\Config;
-use UBC\SISAPI\Service\StudentService;
+use UBC\LtCommons\Authentication\Basic;
+use UBC\LtCommons\HttpClient\GuzzleClient;
+use UBC\LtCommons\Provider\SISDataProvider;
+use UBC\LtCommons\Serializer\JMSSerializer;
+use UBC\LtCommons\Service\Config;
+use UBC\LtCommons\Service\StudentService;
 
 
 class StudentServiceTest extends \PHPUnit_Framework_TestCase {
@@ -77,7 +77,7 @@ EOF;
 
         $student = $this->service->getStudentById('12345678');
 
-        $this->assertInstanceOf('UBC\SISAPI\Entity\Student', $student);
+        $this->assertInstanceOf('UBC\LtCommons\Entity\Student', $student);
         $this->assertEquals('12345678', $student->getStudentNumber());
         $this->assertEquals(9, count($student->getLinks()));
     }
@@ -94,7 +94,7 @@ EOF;
 
         $eligibilites = $this->service->getStudentEligibilities('12345678');
 
-        $this->assertInstanceOf('UBC\SISAPI\Entity\Eligibilities', $eligibilites);
+        $this->assertInstanceOf('UBC\LtCommons\Entity\Eligibilities', $eligibilites);
         $this->assertEquals(12, count($eligibilites->getEligibilites()));
     }
 
@@ -112,7 +112,7 @@ EOF;
         $this->mock->addResponse($response);
 
         $eligibility = $this->service->getStudentCurrentEligibility('12345678');
-        $this->assertInstanceOf('UBC\SISAPI\Entity\Eligibility', $eligibility);
+        $this->assertInstanceOf('UBC\LtCommons\Entity\Eligibility', $eligibility);
         $this->assertEquals(2005, $eligibility->getYear());
         $this->assertEquals(2, count($eligibility->getSectionRefs()));
 
@@ -152,7 +152,7 @@ EOF;
         $this->mock->addResponse($response);
 
         $sections = $this->service->getStudentCurrentSections('12345678');
-        $this->assertContainsOnlyInstancesOf('UBC\SISAPI\Entity\Section', $sections);
+        $this->assertContainsOnlyInstancesOf('UBC\LtCommons\Entity\Section', $sections);
         $this->assertEquals(2, count($sections));
 
         $this->assertEquals('urn:ubc:section:2005W_54', $sections[0]->getId());

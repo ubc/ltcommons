@@ -5,7 +5,7 @@ A Collection of UBC SIS API Services
 Install
 -------
 ```
-composer require ubc/sisapi
+composer require ubc/ltcommons
 ```
 
 Usage
@@ -26,7 +26,7 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 );
 
 $container = new \Symfony\Component\DependencyInjection\ContainerBuilder();
-$container->registerExtension(new \UBC\SISAPI\SISAPIExtension());
+$container->registerExtension(new \UBC\LtCommons\LtCommonsExtension());
 
 $loader = new YamlFileLoader($container, new FileLocator(__DIR__));
 $loader->load('config.yml');
@@ -64,7 +64,7 @@ Configuration
 -------------
 
 ```yml
-sisapi:
+ltcommons:
   Auth2:
     username: service_username 
     password: service_password 

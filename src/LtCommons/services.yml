@@ -1,0 +1,60 @@
+parameters:
+  config.base_url: http://sisapi.example.com
+  config.username: service_username
+  config.password: service_password
+  config.service_url: http://auth2.example.com
+  config.service_application: test_app
+
+services:
+  config:
+    class: UBC\LtCommons\Service\Config
+    arguments: ["%config.base_url%", "%config.username%", "%config.password%"]
+
+  http_client:
+    class: UBC\LtCommons\HttpClient\GuzzleClient
+    lazy: true
+
+  serializer:
+    class: UBC\LtCommons\Serializer\JMSSerializer
+
+  rpc_client:
+    class: \XML_RPC_Client
+    arguments: ["/auth/rpc", "%config.service_url%"]
+
+  auth_module:
+    class: UBC\LtCommons\Authentication\Auth2
+    calls:
+      - [setRpcClient,  ["@rpc_client"]]
+      - [setUsername, ["%config.username%"]]
+      - [setPassword, ["%config.password%"]]
+      - [setServiceApplication, ["%config.service_application%"]]
+      - [setServiceUrl, ["%config.service_url%"]]
+     # comment out below to enable basic auth
+#    class: UBC\LtCommons\Authentication\Basic
+#    calls:
+#      - [setUsername, ["%config.username%"]]
+#      - [setPassword, ["%config.password%"]]
+
+  provider:
+    class: UBC\LtCommons\Provider\SISDataProvider
+    arguments: ["@config", "@http_client", "@auth_module", "@serializer"]
+
+  base_service:
+    abstract:  true
+    arguments: ["@config", "@provider"]
+
+  subject_code:
+    class: UBC\LtCommons\Service\SubjectCodeService
+    lazy: true
+    arguments: ["@config", "@provider"]
+
+  department_code:
+    class: UBC\LtCommons\Service\DepartmentCodeService
+    lazy: true
+    arguments: ["@config", "@provider"]
+
+  student:
+    class: UBC\LtCommons\Service\StudentService
+    lazy: true
+    arguments: ["@config", "@provider"]
+
