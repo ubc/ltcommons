@@ -6,7 +6,6 @@ class DepartmentCodeService extends BaseService
 {
     public function getDepartmentCodes()
     {
-        $response = $this->get('/departmentCode');
-        return $this->serializer->deserialize($response, 'UBC\SISAPI\Entity\DepartmentCodes', 'xml');
+        return $this->provider->getDepartmentCodes();
     }
 }

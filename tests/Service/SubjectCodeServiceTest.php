@@ -28,7 +28,8 @@ class SubjectCodeServiceTest extends \PHPUnit_Framework_TestCase {
         $auth = new Basic();
         $auth->setUsername($config->getAuthUsername());
         $auth->setPassword($config->getAuthPassword());
-        $this->service = new SubjectCodeService($config, $client, $serializer, $auth);
+        $provider = new \UBC\SISAPI\Provider\SISDataProvider($config, $client, $auth, $serializer);
+        $this->service = new SubjectCodeService($config, $provider);
 
         // Create a mock subscriber
         $this->mock = new Mock();
@@ -44,7 +45,6 @@ class SubjectCodeServiceTest extends \PHPUnit_Framework_TestCase {
 
         $codes = $this->service->getSubjectCodes();
 
-        $this->assertEquals(200, $this->service->getStatusCode());
         $this->assertEquals(3, count($codes->codes));
         $this->assertContainsOnlyInstancesOf('UBC\SISAPI\Entity\SubjectCode', $codes->codes);
         $ids = array();

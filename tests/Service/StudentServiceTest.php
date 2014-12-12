@@ -9,6 +9,7 @@ use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use UBC\SISAPI\Authentication\Basic;
 use UBC\SISAPI\HttpClient\GuzzleClient;
+use UBC\SISAPI\Provider\SISDataProvider;
 use UBC\SISAPI\Serializer\JMSSerializer;
 use UBC\SISAPI\Service\Config;
 use UBC\SISAPI\Service\StudentService;
@@ -59,7 +60,8 @@ EOF;
         $auth = new Basic();
         $auth->setUsername($config->getAuthUsername());
         $auth->setPassword($config->getAuthPassword());
-        $this->service = new StudentService($config, $client, $serializer, $auth);
+        $provider = new SISDataProvider($config, $client, $auth, $serializer);
+        $this->service = new StudentService($config, $provider);
 
         // Create a mock subscriber
         $this->mock = new Mock();
@@ -75,7 +77,6 @@ EOF;
 
         $student = $this->service->getStudentById('12345678');
 
-        $this->assertEquals(200, $this->service->getStatusCode());
         $this->assertInstanceOf('UBC\SISAPI\Entity\Student', $student);
         $this->assertEquals('12345678', $student->getStudentNumber());
         $this->assertEquals(9, count($student->getLinks()));
@@ -93,7 +94,6 @@ EOF;
 
         $eligibilites = $this->service->getStudentEligibilities('12345678');
 
-        $this->assertEquals(200, $this->service->getStatusCode());
         $this->assertInstanceOf('UBC\SISAPI\Entity\Eligibilities', $eligibilites);
         $this->assertEquals(12, count($eligibilites->getEligibilites()));
     }
@@ -112,7 +112,6 @@ EOF;
         $this->mock->addResponse($response);
 
         $eligibility = $this->service->getStudentCurrentEligibility('12345678');
-        $this->assertEquals(200, $this->service->getStatusCode());
         $this->assertInstanceOf('UBC\SISAPI\Entity\Eligibility', $eligibility);
         $this->assertEquals(2005, $eligibility->getYear());
         $this->assertEquals(2, count($eligibility->getSectionRefs()));
@@ -129,7 +128,6 @@ EOF;
 
         $eligibility = $this->service->getStudentCurrentEligibility('12345678');
 
-        $this->assertEquals(200, $this->service->getStatusCode());
         $this->assertNull($eligibility, 'should return null when no current eligibility');
     }
 
@@ -154,7 +152,6 @@ EOF;
         $this->mock->addResponse($response);
 
         $sections = $this->service->getStudentCurrentSections('12345678');
-        $this->assertEquals(200, $this->service->getStatusCode());
         $this->assertContainsOnlyInstancesOf('UBC\SISAPI\Entity\Section', $sections);
         $this->assertEquals(2, count($sections));
 
@@ -201,7 +198,6 @@ EOF;
 
         $sections = $this->service->getStudentCurrentSections('12345678');
 
-        $this->assertEquals(200, $this->service->getStatusCode());
         $this->assertEmpty($sections, 'should return empty when no current eligibility');
     }
 }

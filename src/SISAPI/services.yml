@@ -35,22 +35,26 @@ services:
 #      - [setUsername, ["%config.username%"]]
 #      - [setPassword, ["%config.password%"]]
 
+  provider:
+    class: UBC\SISAPI\Provider\SISDataProvider
+    arguments: ["@config", "@http_client", "@auth_module", "@serializer"]
 
   base_service:
     abstract:  true
-    arguments: ["@config", "@http_client", "@serializer", "@auth_module"]
+    arguments: ["@config", "@provider"]
 
   subject_code:
     class: UBC\SISAPI\Service\SubjectCodeService
     lazy: true
-    arguments: ["@config", "@http_client", "@serializer", "@auth_module"]
+    arguments: ["@config", "@provider"]
 
   department_code:
     class: UBC\SISAPI\Service\DepartmentCodeService
     lazy: true
-    arguments: ["@config", "@http_client", "@serializer", "@auth_module"]
+    arguments: ["@config", "@provider"]
 
   student:
     class: UBC\SISAPI\Service\StudentService
     lazy: true
-    arguments: ["@config", "@http_client", "@serializer", "@auth_module"]
+    arguments: ["@config", "@provider"]
+
