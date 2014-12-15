@@ -5,7 +5,6 @@ namespace UBC\LtCommons\Provider;
 
 
 use UBC\LtCommons\Serializer\Serializer;
-use Zend\Code\Generator\Exception\RuntimeException;
 
 class XMLDataProvider implements DataProviderInterface
 {
@@ -87,7 +86,7 @@ class XMLDataProvider implements DataProviderInterface
         $content = @file_get_contents($this->path . $file);
 
         if (false === $content) {
-           throw new RuntimeException('Failed to load file '. $file);
+           throw new \RuntimeException('Failed to load file '. $file);
         }
 
         return $this->stripNamespace($content);

@@ -1,4 +1,4 @@
-A Collection of UBC Data Service Library for Learning Applications
+A Collection of UBC Data Service Libraries for Learning Applications
 ==================================================================
 [![Build Status](https://travis-ci.org/ubc/ltcommons.png)](https://travis-ci.org/ubc/ltcommons)
 
