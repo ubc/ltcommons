@@ -30,7 +30,7 @@
     <campus>UBC</campus>
     <sections>
         <sectionRef>
-            <atom:link href="http://sisapi.example.com/sisapi/v2/section/2005W_54" rel="http://sis.ubc.ca/rels/section"/>
+            <atom:link href="http://sisapi.example.com/sisapi/v2/section/1" rel="http://sis.ubc.ca/rels/section"/>
             <year>2005</year>
             <session>W</session>
             <terms>
@@ -38,7 +38,7 @@
             </terms>
         </sectionRef>
         <sectionRef>
-            <atom:link href="http://sisapi.example.com/sisapi/v2/section/2005W_57" rel="http://sis.ubc.ca/rels/section"/>
+            <atom:link href="http://sisapi.example.com/sisapi/v2/section/2" rel="http://sis.ubc.ca/rels/section"/>
             <year>2005</year>
             <session>W</session>
             <terms>

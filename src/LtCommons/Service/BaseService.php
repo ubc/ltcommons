@@ -1,23 +1,14 @@
 <?php
 namespace UBC\LtCommons\Service;
 
-use UBC\LtCommons\Provider\DataProvider;
+use UBC\LtCommons\Provider\DataProviderFactoryInterface;
 
 abstract class BaseService
 {
-    protected $config;
-    protected $provider;
-    protected $baseUrl;
-    protected $auth_username;
-    protected $auth_password;
-    protected $auth_token;
+    protected $providerFactory;
 
-    protected $response;
-    protected $request;
-
-    public function __construct(Config $config, DataProvider $provider)
+    public function __construct(DataProviderFactoryInterface $providerFactory)
     {
-        $this->config = $config;
-        $this->provider = $provider;
+        $this->providerFactory = $providerFactory;
     }
 }

@@ -4,7 +4,8 @@
 namespace UBC\LtCommons\Provider;
 
 
-interface DataProvider {
+interface DataProviderInterface {
+    static public function doesProvide($dataType);
     public function getStudentById($id);
     public function getStudentEligibilities($id);
     public function getStudentCurrentEligibility($id);

@@ -6,9 +6,15 @@ namespace UBC\LtCommons\Authentication;
  * Class Basic http basic authentication implementation for auth module
  * @package UBC\LtCommons\Authentication
  */
-class Basic implements AuthModule {
+class BasicHttp implements AuthInterface {
     private $username;
     private $password;
+
+    public function __construct($username = '', $password = '')
+    {
+        $this->username = $username;
+        $this->password = $password;
+    }
 
     /**
      * @param mixed $password

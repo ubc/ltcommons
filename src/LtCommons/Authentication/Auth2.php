@@ -7,7 +7,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * Class Auth2 UBC CWL Auth2 client implementation for auth module
  * @package UBC\LtCommons\Authentication
  */
-class Auth2 implements AuthModule, ConfigurationInterface
+class Auth2 implements AuthInterface, ConfigurationInterface
 {
     const RPC_FUNC_NAME = 'applicationTransferSession';
 

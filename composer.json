@@ -3,7 +3,7 @@
     "type": "library",
     "description": "UBC LT Commons",
     "keywords": ["sis","ubc", "ltcommons"],
-    "homepage": "http://github.com/ubc/sisapi",
+    "homepage": "http://github.com/ubc/ltcommons",
     "license": "MIT",
     "authors": [
         {

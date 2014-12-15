@@ -4,14 +4,13 @@
 namespace UBC\LtCommons\Provider;
 
 
-use UBC\LtCommons\Authentication\AuthModule;
+use UBC\LtCommons\Authentication\AuthInterface;
 use UBC\LtCommons\HttpClient\HttpClient;
 use UBC\LtCommons\Serializer\Serializer;
-use UBC\LtCommons\Service\Config;
 
-class SISDataProvider implements DataProvider
+class SISDataProvider implements DataProviderInterface
 {
-    protected $config;
+    protected $base_url;
     protected $client;
     protected $auth;
     protected $serializer;
@@ -19,12 +18,39 @@ class SISDataProvider implements DataProvider
     protected $response;
     protected $request;
 
-    public function __construct(Config $config, HttpClient $client, AuthModule $auth, Serializer $serializer)
+    public function __construct($base_url, HttpClient $client, AuthInterface $auth, Serializer $serializer)
     {
-        $this->config = $config;
+        $this->base_url = $base_url;
         $this->client = $client;
         $this->auth = $auth;
         $this->serializer = $serializer;
+    }
+
+    public function getStudentById($id)
+    {
+        $response = $this->get('/student/' . $id);
+
+        return $this->serializer->deserialize($response, 'UBC\LtCommons\Entity\Student', 'xml');
+    }
+
+    public function getStudentEligibilities($id)
+    {
+        $student = $this->getStudentById($id);
+        $response = $this->get($student->getEligibilityLink());
+
+        return $this->serializer->deserialize($response, 'UBC\LtCommons\Entity\Eligibilities', 'xml');
+    }
+
+    public function getStudentCurrentEligibility($id)
+    {
+        $eligibilities = $this->getStudentEligibilities($id);
+        $current = $eligibilities->getCurrentEligibility();
+        if ($current == null) {
+            return null;
+        }
+        $response = $this->get($current->getEligibilityLink());
+
+        return $this->serializer->deserialize($response, 'UBC\LtCommons\Entity\Eligibility', 'xml');
     }
 
     public function getStudentCurrentSections($id)
@@ -41,33 +67,6 @@ class SISDataProvider implements DataProvider
         }
 
         return $sections;
-    }
-
-    public function getStudentCurrentEligibility($id)
-    {
-        $eligibilities = $this->getStudentEligibilities($id);
-        $current = $eligibilities->getCurrentEligibility();
-        if ($current == null) {
-            return null;
-        }
-        $response = $this->get($current->getEligibilityLink());
-
-        return $this->serializer->deserialize($response, 'UBC\LtCommons\Entity\Eligibility', 'xml');
-    }
-
-    public function getStudentEligibilities($id)
-    {
-        $student = $this->getStudentById($id);
-        $response = $this->get($student->getEligibilityLink());
-
-        return $this->serializer->deserialize($response, 'UBC\LtCommons\Entity\Eligibilities', 'xml');
-    }
-
-    public function getStudentById($id)
-    {
-        $response = $this->get('/student/' . $id);
-
-        return $this->serializer->deserialize($response, 'UBC\LtCommons\Entity\Student', 'xml');
     }
 
     public function getDepartmentCodes()
@@ -89,7 +88,7 @@ class SISDataProvider implements DataProvider
         $url = $uri;
         if ((substr($uri, 0, 7) != 'http://') && (substr($uri, 0, 8) != 'https://')) {
             // the current link is an "relative" URL
-            $url = $this->config->getBaseUrl() . $uri;
+            $url = $this->base_url . $uri;
         }
         $headers = $this->auth->getHeader();
 
@@ -123,5 +122,14 @@ class SISDataProvider implements DataProvider
     public function getResponse()
     {
         return $this->response;
+    }
+
+    static public function doesProvide($dataType)
+    {
+        return in_array($dataType, array(
+            'SIS_STUDENT',
+            'SIS_DEPARTMENT_CODE',
+            'SIS_SUBJECT_CODE'
+        ));
     }
 }
