@@ -86,7 +86,7 @@ class XMLDataProvider implements DataProviderInterface
         $content = @file_get_contents($this->path . $file);
 
         if (false === $content) {
-           throw new \RuntimeException('Failed to load file '. $file);
+           throw new \RuntimeException('Failed to load file '. $this->path . $file);
         }
 
         return $this->stripNamespace($content);
