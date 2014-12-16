@@ -9,7 +9,7 @@ class DataProviderFactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetProviderSISDataProvider()
     {
-        $factory = new DataProviderFactory(array('UBC\LtCommons\Provider\SISDataProvider' => array(
+        $factory = new DataProviderFactory(array(array(
             'class' => 'UBC\LtCommons\Provider\SISDataProvider',
             'arguments' => array(
                 'http://sisapi.example.com',
@@ -27,7 +27,7 @@ class DataProviderFactoryTest extends \PHPUnit_Framework_TestCase
     public function testGetProviderWithService()
     {
         $factory = new DataProviderFactory(array(
-            'UBC\LtCommons\Provider\SISDataProvider' => new SISDataProvider(
+            new SISDataProvider(
                 'http://sisapi.example.com',
                 $this->getMock('UBC\LtCommons\HttpClient\GuzzleClient'),
                 $this->getMock('UBC\LtCommons\Authentication\BasicHttp'),

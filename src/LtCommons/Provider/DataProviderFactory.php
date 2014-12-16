@@ -14,29 +14,29 @@ class DataProviderFactory implements DataProviderFactoryInterface {
 
     public function addProvider($provider)
     {
-        $this->providers[get_class($provider)] = $provider;
+        $this->providers[] = $provider;
     }
 
     public function getProvider($dataType)
     {
-        $providerKey = null;
+        $supportProvider = null;
 
-        foreach($this->providers as $class => $provider) {
-            if ($class::doesProvide($dataType)) {
-                $providerKey = $class;
+        foreach($this->providers as $k => $provider) {
+            if (!$provider instanceof DataProviderInterface) {
+                $this->providers[$k] = $provider = $this->createProvider($provider);
+            }
+
+            if ($provider::doesProvide($dataType)) {
+                $supportProvider = $provider;
                 break;
             }
         }
 
-        if (null == $providerKey) {
+        if (null == $supportProvider) {
             throw new \RuntimeException(sprintf('No provider has been configured for data type %s', $dataType));
         }
 
-        if (!$this->providers[$providerKey] instanceof DataProviderInterface) {
-            $this->providers[$providerKey] = $this->createProvider($this->providers[$providerKey]);
-        }
-
-        return $this->providers[$providerKey];
+        return $supportProvider;
     }
 
     private function createProvider(array $config)
