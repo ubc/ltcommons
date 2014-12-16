@@ -14,7 +14,7 @@ class DataProviderFactoryTest extends \PHPUnit_Framework_TestCase
             'arguments' => array(
                 'http://sisapi.example.com',
                 $this->getMock('UBC\LtCommons\HttpClient\GuzzleClient'),
-                $this->getMock('UBC\LtCommons\Authentication\BasicHttp'),
+                $this->getMock('UBC\LtCommons\Authentication\HttpBasic'),
                 $this->getMock('UBC\LtCommons\Serializer\JMSSerializer')
             )
         )));
@@ -30,7 +30,7 @@ class DataProviderFactoryTest extends \PHPUnit_Framework_TestCase
             new SISDataProvider(
                 'http://sisapi.example.com',
                 $this->getMock('UBC\LtCommons\HttpClient\GuzzleClient'),
-                $this->getMock('UBC\LtCommons\Authentication\BasicHttp'),
+                $this->getMock('UBC\LtCommons\Authentication\HttpBasic'),
                 $this->getMock('UBC\LtCommons\Serializer\JMSSerializer')
             )
         ));

@@ -7,7 +7,7 @@ namespace UBC\LtCommons\Tests\Service;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
-use UBC\LtCommons\Authentication\BasicHttp;
+use UBC\LtCommons\Authentication\HttpBasic;
 use UBC\LtCommons\Entity\Eligibilities;
 use UBC\LtCommons\Entity\Eligibility;
 use UBC\LtCommons\Entity\Section;

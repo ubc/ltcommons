@@ -6,7 +6,7 @@ namespace UBC\LtCommons\Authentication;
  * Class Basic http basic authentication implementation for auth module
  * @package UBC\LtCommons\Authentication
  */
-class BasicHttp implements AuthInterface {
+class HttpBasic implements AuthInterface {
     private $username;
     private $password;
 

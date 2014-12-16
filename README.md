@@ -30,7 +30,7 @@ $providerFactory = new DataProviderFactory();
 $providerFactory->addProvider(new SISDataProvider(
     $base_url,
     new GuzzleClient(),
-    new BasicHttp($username, $password),
+    new HttpBasic($username, $password),
     new JMSSerializer()
 ));
 $service = new DepartmentCodeService($providerFactory);

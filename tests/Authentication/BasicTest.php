@@ -7,7 +7,7 @@ class BasicTest extends \PHPUnit_Framework_TestCase {
     {
         parent::setUp();
 
-        $this->auth = new \UBC\LtCommons\Authentication\BasicHttp('Aladdin', 'open sesame');
+        $this->auth = new \UBC\LtCommons\Authentication\HttpBasic('Aladdin', 'open sesame');
     }
 
     public function testGetHeader()

@@ -7,7 +7,7 @@ namespace UBC\LtCommons\Tests\Provider;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
-use UBC\LtCommons\Authentication\BasicHttp;
+use UBC\LtCommons\Authentication\HttpBasic;
 use UBC\LtCommons\HttpClient\GuzzleClient;
 use UBC\LtCommons\Provider\SISDataProvider;
 use UBC\LtCommons\Serializer\JMSSerializer;
@@ -49,7 +49,7 @@ EOF;
 
         $serializer = new JMSSerializer();
         $client = new GuzzleClient();
-        $auth = new BasicHttp('username', 'password');
+        $auth = new HttpBasic('username', 'password');
         $this->provider = new SISDataProvider('http://sisapi.example.com', $client, $auth, $serializer);
 
         // Create a mock subscriber

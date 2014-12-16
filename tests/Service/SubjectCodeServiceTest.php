@@ -2,7 +2,7 @@
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
-use UBC\LtCommons\Authentication\BasicHttp;
+use UBC\LtCommons\Authentication\HttpBasic;
 use UBC\LtCommons\HttpClient\GuzzleClient;
 use UBC\LtCommons\Serializer\JMSSerializer;
 use UBC\LtCommons\Service\Config;
