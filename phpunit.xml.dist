@@ -7,7 +7,7 @@
          bootstrap="tests/bootstrap.php"
         >
     <testsuites>
-        <testsuite name="UBC SIS API Test Suite">
+        <testsuite name="LT Commons Test Suite">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>

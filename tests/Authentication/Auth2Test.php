@@ -4,7 +4,8 @@ use UBC\LtCommons\Authentication\Auth2;
 /**
  * @backupGlobals disabled
  */
-class Auth2Test extends \PHPUnit_Framework_TestCase {
+class Auth2Test extends \PHPUnit_Framework_TestCase
+{
     private $auth;
     private $ticket = 'AVOUUb4DzzS6m0OrwncbEg@@';
 
@@ -17,18 +18,19 @@ class Auth2Test extends \PHPUnit_Framework_TestCase {
     {
         parent::setUp();
 
-        $this->auth = new Auth2();
-        $this->auth->setUsername('service_username');
-        $this->auth->setPassword('service_password');
-        $this->auth->setServiceUrl('https://www.auth.stg.id.ubc.ca');
-        $this->auth->setServiceApplication('app_name');
-
         $value = new \XML_RPC_Value($this->ticket);
         $this->rpcResponse = new \XML_RPC_Response($value);
         $this->mockClient = $this->getMockBuilder('\XML_RPC_Client')
             ->setConstructorArgs(array('/auth/rpc', 'https://example.com'))
             ->getMock();
 
+        $this->auth = new Auth2(
+            $this->mockClient,
+            'service_username',
+            'service_password',
+            'app_name',
+            'https://www.auth.stg.id.ubc.ca'
+        );
         $this->auth->setRpcClient($this->mockClient);
     }
 

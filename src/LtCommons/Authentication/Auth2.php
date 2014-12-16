@@ -16,17 +16,26 @@ class Auth2 implements AuthInterface, ConfigurationInterface
     private $serviceApplication;
 
     /**
-     * @var service account username
+     * @var string service account username
      */
     private $username;
     /**
-     * @var service account password
+     * @var string service account password
      */
     private $password;
     private $token;
     private $tokenTimestamp;
     private $tokenLifetime = 0;
     private $lastResponse;
+
+    function __construct(\XML_RPC_Client $rpcClient, $username, $password, $serviceApplication, $serviceUrl)
+    {
+        $this->password = $password;
+        $this->rpcClient = $rpcClient;
+        $this->serviceApplication = $serviceApplication;
+        $this->serviceUrl = $serviceUrl;
+        $this->username = $username;
+    }
 
     /**
      * @param mixed $rpcClient
