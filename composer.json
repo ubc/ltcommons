@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "jms/serializer": "~0.16",
+        "jms/serializer": "~1.1.0",
         "doctrine/collections": "~1.2",
         "guzzlehttp/guzzle": "5.0.*",
         "pear-pear.php.net/XML_RPC": "1.5.5",
