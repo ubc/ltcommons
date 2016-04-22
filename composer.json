@@ -33,5 +33,8 @@
     },
     "autoload": {
         "psr-4": {"UBC\\LtCommons\\": "src/LtCommons/"}
+    },
+    "config": {
+        "secure-http": false
     }
 }
