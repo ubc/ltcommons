@@ -3,7 +3,7 @@
     "type": "library",
     "description": "UBC LT Commons",
     "keywords": ["sis","ubc", "ltcommons"],
-    "homepage": "http://github.com/ubc/ltcommons",
+    "homepage": "https://github.com/ubc/ltcommons",
     "license": "MIT",
     "authors": [
         {
@@ -16,7 +16,7 @@
     "repositories": [
         {
             "type": "pear",
-            "url": "http://pear.php.net"
+            "url": "https://pear.php.net"
         }
     ],
     "require": {
