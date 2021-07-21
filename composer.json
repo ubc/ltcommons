@@ -14,17 +14,13 @@
         }
     ],
     "repositories": [
-        {
-            "type": "pear",
-            "url": "https://pear.php.net"
-        }
     ],
     "require": {
         "php": ">=5.3.9 <7",
         "jms/serializer": "~1.1.0",
         "doctrine/collections": "~1.2",
         "guzzlehttp/guzzle": "5.0.*",
-        "pear-pear.php.net/XML_RPC": "1.5.5",
+        "pear/xml_rpc2": "1.1.4",
         "symfony/config": "2.8.4",
         "symfony/filesystem": "2.8.4"
     },
